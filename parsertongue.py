@@ -14,16 +14,18 @@ headers  = ["Date","Title","Link"]
 
 ## RSS Parsing
 feed = feedparser.parse(url)
-
-for post in feed.entries:
-    date = "(%d/%02d/%02d)" % (post.published_parsed.tm_year, \
-        post.published_parsed.tm_mon, \
-        post.published_parsed.tm_mday)
+# For each item in the feed, put the relevant element into array
+for item in feed.entries:
+    date = "(%d/%02d/%02d)" % (item.published_parsed.tm_year, \
+        item.published_parsed.tm_mon, \
+        item.published_parsed.tm_mday)
     date_list.append(date)
-    title_list.append(post.title)
-    link_list.append(post.link)
+    title_list.append(item.title)
+    link_list.append(item.link)
 
+# Create table variable with zipped element lists
 table = zip(date_list, title_list, link_list)
+# Print table using tabulate library
 print(tabulate(table, headers=headers))
 
-print("Number of total RSS posts:", len(feed.entries))
+print("Number of total RSS items:", len(feed.entries))
