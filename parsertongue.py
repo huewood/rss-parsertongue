@@ -3,6 +3,8 @@ import feedparser
 from tabulate import tabulate
 import time
 from datetime import date
+import send_email
+
 # Todays date
 #today = date.today
 # Test date
@@ -32,8 +34,13 @@ for item in feed.entries:
 # Create table variable with zipped element lists
 table = zip(title_list, link_list)
 # Print table using tabulate library
-print(len(title_list), "patch(es) came out on", today,":")
-print(tabulate(table, headers=headers))
-
+#print(len(title_list), "patch(es) came out on", today,":")
+#print_table = print(tabulate(table, headers=headers, tablefmt="fancy_grid"))
+#print(print_table)
 # Debugging
-print("Total RSS items:", len(feed.entries))
+#print("Total RSS items:", len(feed.entries))
+
+## Call send_email function
+subject = "New ALAS1 Patches for", today
+msg = tabulate(table, headers=headers, tablefmt="github")
+send_email.send_email(subject, msg)

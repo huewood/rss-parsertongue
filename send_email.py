@@ -14,7 +14,8 @@ def send_email(subject, msg):
     except:
         print("Email failed to send.")
 
-subject = "Test subject"
-msg = "Hello World!"
+# Debug
+#subject = "Test subject"
+#msg = "Hello World!"
 
-send_email(subject, msg)
+#send_email(subject, msg)
